@@ -1,0 +1,1 @@
+Sistema de gerenciamento de backlinks. É um projeto para aplicar conhecimentos adquiridos de PHP.
