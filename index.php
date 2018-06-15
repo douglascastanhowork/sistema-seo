@@ -12,7 +12,7 @@
  	}
  	if (isset($_GET['ordem']) && empty($_GET['ordem']) ==  false) {
  			$ordem = addslashes($_GET['ordem']);
- 			$sql = "SELECT * FROM controle WHERE tipo_backlink = ".$ordem;
+ 			$sql = "SELECT * FROM controle WHERE tipo_backlink = '".$ordem."' ";
  		} else {
  			$ordem = "";
  			$sql = "SELECT * FROM controle";
@@ -38,7 +38,7 @@
  		</tr>
  		<?php 		
  		
- 		//$sql = "SELECT * FROM controle";		
+ 		//$sql = "SELECT * FROM controle";	
  		$sql = $pdo->query($sql);
  		if ($sql->rowCount() > 0) {
  			
