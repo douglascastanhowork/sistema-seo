@@ -18,6 +18,7 @@
  			$sql = "SELECT * FROM controle";
  		}
  	?>
+	Filtro por tipo </br>
  	<form method="GET">
  		<select name="ordem" onchange="this.form.submit()">
  			<option></option>
@@ -36,9 +37,7 @@
  			<th>Status</th>
  			<th>Proxy</th>
  		</tr>
- 		<?php 		
- 		
- 		//$sql = "SELECT * FROM controle";	
+ 		<?php
  		$sql = $pdo->query($sql);
  		if ($sql->rowCount() > 0) {
  			
@@ -65,4 +64,22 @@
  } else {
  		header("Location: login.php");
  	}
+
+require 'config.php';
+
+if (empty($_SESSION['id'])) {
+	header("Location: login.php");
+	exit;
+}
+
+$email = '';
+$sql = "SELECT * FROM usuarios WHERE id= '".addslashes($_SESSION['id'])."'";
+$sql = $pdo->query($sql);
+
+if ($sql->rowCount() > 0) {
+	$info = $sql->fetch();
+	$email = $info['email'];
+}
+
 ?>
+<p>Usuário: <?php echo $email ?> - <a href="sair.php">Sair</a> </p>

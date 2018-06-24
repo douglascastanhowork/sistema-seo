@@ -59,6 +59,9 @@
 				<div class="recuperarsenha">
 					Esqueceu a senha?&nbsp <a href="http://localhost/sistema-seo/login.php">clique aqui</a>
 				</div>
+				<div class="cadastrar">
+					Ainda não tem cadastro?&nbsp <a href="http://localhost/sistema-seo/cadastrar.php">cadastrar</a>
+				</div>
 				</div>
 			</div>
 		</div>
