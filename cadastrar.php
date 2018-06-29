@@ -32,7 +32,7 @@ if (empty($_POST['email']) == false) {
 	<body>
 		<div class="container">
 			<div class="logo">
-				<img src="assets/images/logo.png" border="0" width="150" height="150">
+				<img src="assets/images/logo.png" border="0" width="120" height="100" />
 			</div>
 			<div class="caixa">
 				<div class="titulo">

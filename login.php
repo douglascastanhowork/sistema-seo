@@ -33,14 +33,14 @@
 <html>
 	<head>
 		<title>Login | Sistema SEO</title>
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style-login.css">
 		<meta charset="utf-8">
 		<meta id="viewport" name="viewport" content="width=device-width, user-scalable=0" />
 	</head>
 	<body>
 		<div class="container">
 			<div class="logo">
-				<img src="assets/images/logo.png" border="0" width="150" height="150">
+				<img src="assets/images/logo.png" border="0" width="120" height="100" />
 			</div>
 			<div class="caixa">
 				<div class="titulo">
