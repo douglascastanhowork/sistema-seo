@@ -299,3 +299,6 @@ tr:nth-child(even) {
 	justify-content: center;
 	margin-top: 25px;
 }
+.cadastre a {
+	text-decoration: none;
+}
