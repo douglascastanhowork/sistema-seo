@@ -17,7 +17,13 @@ header {
 	justify-content: center;
 	height: 65px;
 	background-color: #63cddc;
-	box-shadow: 10px 10px 10px #888;
+	margin-top: 10px;
+}
+.header {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	box-shadow: 0px 0px 10px #63cddc;
 }
 .container {
 	display: flex;
@@ -301,4 +307,24 @@ tr:nth-child(even) {
 }
 .cadastre a {
 	text-decoration: none;
+}
+.aviso {
+	height: 40px;
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	justify-content: center;
+}
+.container-aviso {	
+	flex: 1;
+	height: 40px;
+	max-width: 1200px;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	background-color: #F79F81;
+	border-radius: 5px;
+}
+.container-aviso span {
+	color: #8A0808;
 }

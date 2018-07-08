@@ -12,6 +12,17 @@ if (empty($_POST['email']) == false) {
 	if ($sql->rowCount() <= 0) {
 		$sql = "INSERT INTO usuarios (email, senha) VALUES ('$email', '$senha')";
 		$sql = $pdo->query($sql);
+		$id = $pdo->lastInsertId();
+
+		$md5 = md5($id);
+
+		$link = "http://localhost/sistema-seo/confirmar.php?h=".$md5;
+
+		$assunto = "Confirme seu cadastro";
+		$mensagem = "Confirme sua conta clicando no link abaixo:"."\r\n".$link;
+		$headers = "From: seusite@seusite.com.br"."\r\n"."X-Mailer: PHP/".phpversion();
+
+		//mail($email, $assunto, $mensagem, $headers);
 
 		unset($_SESSION['id']);
 

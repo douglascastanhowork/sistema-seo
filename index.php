@@ -38,6 +38,8 @@ if (empty($_POST['nome2']) == false ) {
 	$status = addslashes($_POST['status2']);
 	$proxy = addslashes($_POST['proxy2']);
 
+
+
 	$nome = strtoupper($nome);
 	$tipobacklink = strtoupper($tipobacklink);
 	$indexacao = strtoupper($indexacao);
@@ -66,11 +68,29 @@ if (empty($_POST['nome2']) == false ) {
 		$sql_cadastrar->execute();*/
 	} else {
 		echo "ERRO";
-	}
+	}	
 }
+	/*
+	*Selecionar cadastro logado e pegar o valor no status
+	*
+	*/
+	$sql_confirmar = "SELECT * FROM usuarios WHERE email = '$emailusuario'";
+	$sql_confirmar = $pdo->query($sql_confirmar);
+
+	if ($sql_confirmar->rowCount() > 0) {
+		$sql_confirmar = $sql_confirmar->fetch();
+		$status_usuario = $sql_confirmar['status'];
+	}
+
+	if ($status_usuario <> 0) {
+
+		$teste = "";
+
+	} else {
+		$teste = "Acesse seu e-mail e clique no link para confirmar seu cadastro";
+
+	}
 ?>
-
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -79,21 +99,33 @@ if (empty($_POST['nome2']) == false ) {
 		<link rel="stylesheet" type="text/css" href="assets/css/style-index.css" />
 	</head>
 	<body>
-		<header>
-			<div class="container topo">
-				<div class="logo">
-					<a href="index.php"><img src="assets/images/logo.png" border="0" width="75" /></a>
+		<?php if ($status_usuario <> 1) {
+			?>
+			<div class="aviso">
+				<div class="container container-aviso">
+					<h4><span>Atenção!</span> Acesse seu e-mail e clique no link para confirmar seu cadastro</h4>
 				</div>
-				<nav>
-					<ul>
-						<li><a href="#bg"><button class="button">Adicionar<img src="assets/images/adicionar.png" border="0" height="20"></button></a></li>
-						<li><input type="search" class="search" placeholder="Buscar" /></li>
-						<li><img src="assets/images/usuario_logado.png" border="0" height="30">&nbsp&nbsp<span><?php echo $emailusuario ?></span></li>
-						<li><a href="sair.php"><img src="assets/images/sair.png" border="0" height="30" /></a></li>
-					</ul>
-				</nav>
 			</div>
-		</header>
+			<?php
+			}
+		?>
+		<header>
+			<div class="header">
+				<div class="container topo">
+					<div class="logo">
+						<a href="index.php"><img src="assets/images/logo.png" border="0" width="75" /></a>
+					</div>
+					<nav>
+						<ul>
+							<li><a href="index.php#bg"><button class="button">Adicionar<img src="assets/images/adicionar.png" border="0" height="20"></button></a></li>
+							<li><input type="search" class="search" placeholder="Buscar" /></li>
+							<li><img src="assets/images/usuario_logado.png" border="0" height="30">&nbsp&nbsp<span><?php echo $emailusuario ?></span></li>
+							<li><a href="sair.php"><img src="assets/images/sair.png" border="0" height="30" /></a></li>
+						</ul>
+					</nav>
+				</div>
+		 	</div>
+		</header>		
 		<aside>
 			<div class="container aside">
 				<div id="bg">										
