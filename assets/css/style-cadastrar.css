@@ -27,8 +27,7 @@ body {
 .caixa {
 	display: flex;
 	align-items: center;
-	flex-direction: column;
-	
+	flex-direction: column;	
 	height: 450px;
 	background-color: #FFF;
 	border: 1px solid #FFF;
@@ -94,6 +93,9 @@ body {
 	.container {
 		padding-left: 15px;
 		padding-right: 15px;
+	}
+	.caixa {
+		margin-bottom: 15px;
 	}
 }
 @media (max-width: 426px){

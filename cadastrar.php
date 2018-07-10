@@ -26,7 +26,9 @@ if (empty($_POST['email']) == false) {
 
 		unset($_SESSION['id']);
 
-		header("Location: index.php");
+		//header("Location: index.php");
+
+		echo "O link é: ".$link;
 		exit;
 	}
 }
@@ -35,7 +37,7 @@ if (empty($_POST['email']) == false) {
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Login | Sistema SEO</title>
+		<title>Cadastrar | Sistema SEO</title>
 		<link rel="stylesheet" type="text/css" href="assets/css/style-cadastrar.css">
 		<meta charset="utf-8">
 		<meta id="viewport" name="viewport" content="width=device-width, user-scalable=0" />
@@ -61,7 +63,6 @@ if (empty($_POST['email']) == false) {
 					</form>
 				<div class="voltar_login">
 					<a href="http://localhost/sistema-seo/login.php">Voltar para login</a>
-				</div>
 				</div>
 			</div>
 		</div>

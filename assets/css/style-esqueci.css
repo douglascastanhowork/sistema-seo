@@ -1,0 +1,147 @@
+* {
+	font-family: Arial;
+}
+body {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	background: url(../images/body.png);
+	background-attachment: fixed;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: #3485ff;
+}
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 1000px;
+	margin-top: 180px;
+	margin-right: 20px;
+	margin-left: 20px;
+	width: 100%;
+	height: 100%;
+}
+.caixa {
+	display: flex;
+	align-items: center;
+	height: 250px;
+	padding: 30px;
+	background-color: #FFF;
+	border: 1px solid #FFF;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #888;
+}
+.texto {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-family: Arial;
+	font-size: 23px;
+	font-weight: bold;
+}
+.texto span {
+	margin-bottom: 15px;
+}
+.email {
+	margin-top: 5px;
+	width: 300px;
+	height: 40px;
+	border: 2px solid #CCC;
+	border-radius: 2px;
+	color: #b1a8a8;
+	padding-left: 10px;
+	column-rule-color: #b1a8a8;
+	font-size: 16px;
+}
+.senha {
+	margin-top: 5px;
+	width: 240px;
+	height: 40px;
+	border: 2px solid #CCC;
+	border-radius: 2px;
+	color: #b1a8a8;
+	padding-left: 10px;
+	column-rule-color: #b1a8a8;
+	font-size: 16px;
+}
+.botao {
+	margin-top: 25px;
+	text-decoration: none;
+	font-size: 20px;
+	background-color: #8258FA;
+	padding: 15px;
+	margin-top: 25px;
+	border: 2px solid #8258FA;
+	border-radius: 5px;
+	color: #FFF;
+}
+.atencao {
+	color: red;
+	margin-bottom: -15px;
+}
+.token {
+	color: #FFF;
+}
+.botao:hover {
+	border: 2px solid #8258FA;
+	background-color: #FFF;
+	color: #8258FA;
+	transition: 0.5s;
+	cursor: pointer;
+}
+.botao2 {
+	margin-top: 30px;
+}
+.botao2 a {
+	text-decoration: none;
+	font-size: 20px;
+	background-color: #8258FA;
+	padding: 15px;
+	margin-top: 25px;
+	border: 2px solid #8258FA;
+	border-radius: 5px;
+	color: #FFF;
+}
+.botao2 a:hover {
+	border: 2px solid #8258FA;
+	background-color: #FFF;
+	color: #8258FA;
+	transition: 0.5s;
+}
+.aviso {
+	display: flex;
+	margin-top: 15px;
+	background-color: #F5A9A9;
+	padding: 10px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #610B0B;
+	border-left: 7px solid #B40404;
+}
+@media (max-width: 475px) {
+	.texto {
+		font-size: 18px;
+	}
+	.container {
+		margin-top: 160px;
+	}
+	.email {
+		max-width: 250px;
+		width: 100%;
+	}
+	.senha {
+		max-width: 190px;
+		width: 100%;
+	}
+	body {
+	background: none;;
+	background-color: #63cddc;
+	}
+}

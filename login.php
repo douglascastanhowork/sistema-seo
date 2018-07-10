@@ -57,7 +57,7 @@
 						</div>
 					</form>
 				<div class="recuperarsenha">
-					Esqueceu a senha?&nbsp <a href="http://localhost/sistema-seo/login.php">clique aqui</a>
+					Esqueceu a senha?&nbsp <a href="http://localhost/sistema-seo/esqueci.php">clique aqui</a>
 				</div>
 				<div class="cadastrar">
 					Ainda não tem cadastro?&nbsp <a href="http://localhost/sistema-seo/cadastrar.php">cadastrar</a>
