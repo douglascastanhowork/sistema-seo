@@ -1,16 +1,27 @@
 <?php
- session_start();
- require 'config.php';
+ session_start(); 
 
+//Fazer conexão com bando de dados
  if (isset($_SESSION['id']) && empty($_SESSION['id']) == false) {
- 	
- 	try {
- 		$pdo = new PDO("mysql:dbname=sistemaseo;host=127.0.0.1", "root", "");
- 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
- 	} catch (PDOException $e) {
- 		echo "Erro: ".$e->getMessage();
- 		exit;
+ 	require 'config.php';
+
+//Faz busca no banco de dados usando informação do elemento de pesquisa
+ 	$resultado_pesquisa = 3;
+ 	if(!empty($_GET['pesquisar'])) {
+ 		$pesquisa = $_GET['pesquisar'];
+
+ 		$sql_pesquisa = "SELECT * FROM controle WHERE nome = :campo OR url = :campo OR tipo_backlink = :campo OR indexado = :campo OR projeto = :campo OR status = :campo OR proxy = :campo";
+ 		$sql_pesquisa = $pdo->prepare($sql_pesquisa);
+ 		$sql_pesquisa->bindValue(":campo", $pesquisa);
+ 		$sql_pesquisa->execute();
+
+ 		if ($sql_pesquisa->rowCount() > 0) {
+ 			$resultado_pesquisa = 1;//Pesquisa retornou algum resultado
+ 		} else {
+ 			$resultado_pesquisa = 0;//Pesquisa não retornou resultado
+ 		}
  	}
+//Faz busca no bando de dados usando informação do selection
  	if (isset($_GET['ordem']) && empty($_GET['ordem']) ==  false) {
  			$ordem = addslashes($_GET['ordem']);
  			$sql = "SELECT * FROM controle WHERE tipo_backlink = '".$ordem."' ";
@@ -18,7 +29,7 @@
  			$ordem = "";
  			$sql = "SELECT * FROM controle";
  		}
-
+//Exibir email do usuário logado
  	$emailusuario = '';
  	$sqlemail = "SELECT * FROM usuarios WHERE id= '".addslashes($_SESSION['id'])."'";
  	$sqlemail = $pdo->query($sqlemail);
@@ -29,6 +40,7 @@
  	}
  	?>
 <?php
+// Cadastrar novo usuário
 if (empty($_POST['nome2']) == false ) {
 	$nome = addslashes($_POST['nome2']); 
 	$tipobacklink = addslashes($_POST['selecao']);
@@ -57,23 +69,11 @@ if (empty($_POST['nome2']) == false ) {
 		$sql_cadastrar = $pdo->query($sql_cadastrar);
 
 		header("Location: index.php");		
-
-		/*$sql_cadastrar->bindValue(":nome", $nome);
-		$sql_cadastrar->bindValue(":url", $url);
-		$sql_cadastrar->bindValue(":tipobacklink", $tipobacklink);
-		$sql_cadastrar->bindValue(":indexacao", $indexacao);
-		$sql_cadastrar->bindValue(":projeto", $projeto);
-		$sql_cadastrar->bindValue(":status", $status);
-		$sql_cadastrar->bindValue(":proxy", $proxy);
-		$sql_cadastrar->execute();*/
 	} else {
 		echo "ERRO";
 	}	
 }
-	/*
-	*Selecionar cadastro logado e pegar o valor no status
-	*
-	*/
+	//Selecionar cadastro logado e pegar o valor no status
 	$sql_confirmar = "SELECT * FROM usuarios WHERE email = '$emailusuario'";
 	$sql_confirmar = $pdo->query($sql_confirmar);
 
@@ -117,9 +117,10 @@ if (empty($_POST['nome2']) == false ) {
 					</div>
 					<nav>
 						<ul>
-							<li><a href="index.php#bg"><button class="button">Adicionar<img src="assets/images/adicionar.png" border="0" height="20"></button></a></li>
-							<li><input type="search" class="search" placeholder="Buscar" /></li>
+							<li><a href="index.php#bg"><button class="button">Adicionar<img src="assets/images/adicionar.png" border="0" height="20" /></button></a></li>
+
 							<li><img src="assets/images/usuario_logado.png" border="0" height="30">&nbsp&nbsp<span><?php echo $emailusuario ?></span></li>
+
 							<li><a href="sair.php"><img src="assets/images/sair.png" border="0" height="30" /></a></li>
 						</ul>
 					</nav>
@@ -201,19 +202,27 @@ if (empty($_POST['nome2']) == false ) {
 					</div>								
 				</div>
 				<div class="table">
-					<div class="titletable"> Controle de Domínios</div>
-					<div class="filtro">
-						Filtro por tipo</br>
-					</div>
-					<form method="GET">
-						<select name="ordem" onchange="this.form.submit()">
-					 		<option></option>
-					 		<option value="PBN" <?php echo($ordem == "PBN")?'selected="selected"':''; ?>>PBN</option>
-					 		<option value="WEB 2.0 EXPIRADA" <?php echo($ordem == "WEB 2.0 EXPIRADA")?'selected="selected"':''; ?>>Web 2.0 Expirada</option>
-					 		<option value="WEB 2.0 NOVA" <?php echo($ordem == "WEB 2.0 NOVA")?'selected="selected"':''; ?>>Web 2.0 Nova</option>
-					 	</select>
-					</form></br>
-					
+					<div class="titletable"> Controle de Domínios</div>						
+						<div class="todos_filtros">
+							<form method="GET">
+								<div class="filtro">
+									Filtro por tipo</br>
+								</div>
+								<select name="ordem" class="select" onchange="this.form.submit()">
+							 		<option></option>
+							 		<option value="PBN" <?php echo($ordem == "PBN")?'selected="selected"':''; ?>>PBN</option>
+							 		<option value="WEB 2.0 EXPIRADA" <?php echo($ordem == "WEB 2.0 EXPIRADA")?'selected="selected"':''; ?>>Web 2.0 Expirada</option>
+							 		<option value="WEB 2.0 NOVA" <?php echo($ordem == "WEB 2.0 NOVA")?'selected="selected"':''; ?>>Web 2.0 Nova</option>
+							 	</select>
+							</form></br>
+							<form method="GET" class="filtro_pesquisar">
+								<div class="filtro">
+									Campo de Pesquisa</br>
+								</div>
+								<input type="search" name="pesquisar" class="search" placeholder="Digite sua pesquisa..." />
+								<input class="btn_pesquisar" type="submit" value="Pesquisar" />
+							</form>			
+						</div>
 					<table class="format_table">
 					 	<tr>
 					 		<th>Nome</th>
@@ -226,7 +235,7 @@ if (empty($_POST['nome2']) == false ) {
 					 	</tr>
 					 	<?php
 					 	$sql = $pdo->query($sql);
-					 	if ($sql->rowCount() > 0) {
+					 	if ($sql->rowCount() > 0 && $resultado_pesquisa == 3) {
 					 			
 					 		foreach ($sql->fetchAll() as $dado):
 					 			?>
@@ -243,6 +252,28 @@ if (empty($_POST['nome2']) == false ) {
 
 					 			<?php
 					 		endforeach;
+					 	} elseif($resultado_pesquisa == 1) {
+					 		foreach ($sql_pesquisa->fetchAll() as $dado):
+					 			?>
+
+					 			<tr>
+					 				<td><?php echo $dado['nome']; ?></td>
+					 				<td><a href="<?php echo $dado['url']; ?>" target="_blank"><?php echo $dado['url']; ?></a></td>
+					 				<td><?php echo $dado['tipo_backlink']; ?></td>
+					 				<td><?php echo $dado['indexado']; ?></td>
+					 				<td><?php echo $dado['projeto']; ?></td>
+					 				<td><?php echo $dado['status']; ?></td>
+					 				<td><?php echo $dado['proxy']; ?></td>
+					 			</tr>
+
+					 			<?php
+					 		endforeach;
+					 	} else {
+					 		?>
+					 		<div class="aviso_busca">
+					 			Busca não encontrou nenhum resultado
+					 		</div>
+					 		<?PHP
 					 	}
 					 	?> 		
 					</table>
